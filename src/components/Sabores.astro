@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import chocolateSal from '../assets/chocolate-sal.jpg';
+import dulceDeLeche from '../assets/dulce-de-leche.jpg';
+import avenaNueces from '../assets/avena-nueces.jpg';
+
+// para agregar un sabor: sumar un objeto acá y su foto en src/assets
+const sabores = [
+  {
+    nombre: 'Chocolate y sal',
+    descripcion: 'La clásica de la casa. Chips de chocolate semiamargo 60 % y escamas de sal marina arriba.',
+    precio: '$2.400',
+    foto: chocolateSal,
+    alt: 'Galleta de chocolate y sal marina',
+  },
+  {
+    nombre: 'Dulce de leche',
+    descripcion: 'Relleno de dulce de leche repostero, masa apenas dorada y borde crocante.',
+    precio: '$2.600',
+    foto: dulceDeLeche,
+    alt: 'Galleta de dulce de leche',
+  },
+  {
+    nombre: 'Avena y nueces',
+    descripcion: 'Avena arrollada, nueces tostadas y canela. La menos dulce de la carta.',
+    precio: '$2.400',
+    foto: avenaNueces,
+    alt: 'Galleta de avena y nueces',
+  },
+];
+---
+
+<section class="sec" id="sabores">
+  <div class="wrap">
+    <div class="sechead rv">
+      <div class="eyebrow">La carta</div>
+      <h2>Seis sabores, <em>todo el año</em></h2>
+      <p>Cada galleta pesa 90 gramos y se hornea por encargo. Se venden por unidad o en caja de seis.</p>
+    </div>
+    <div class="grid3">
+      {sabores.map((s) => (
+        <article class="card rv">
+          <div class="shot"><Image src={s.foto} alt={s.alt} width={600} /></div>
+          <div class="body">
+            <h3>{s.nombre}</h3>
+            <p>{s.descripcion}</p>
+            <div class="pricerow"><span class="price">{s.precio}</span><span class="unit">Por unidad</span></div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

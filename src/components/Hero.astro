@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../assets/hero.webp';
+---
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Horneado en pequeños lotes</div>
+      <h1>Galletas de <em>verdad</em>, hechas a mano.</h1>
+      <p class="sub">Masa de manteca, chips de chocolate semiamargo y un toque de sal marina. Cada tanda sale del horno el mismo día que llega a tus manos.</p>
+      <div class="actions">
+        <a class="btn" href="#pedidos">Hacer un pedido</a>
+        <a class="btn ghost" href="#sabores">Ver sabores</a>
+      </div>
+      <div class="meta">
+        <div><b>6</b><span>Sabores fijos</span></div>
+        <div><b>24 h</b><span>Del horno a tu casa</span></div>
+        <div><b>100 %</b><span>Ingredientes nobles</span></div>
+      </div>
+    </div>
+    <div class="heroart">
+      <div class="ring"></div>
+      <div class="disc"></div>
+      <Image src={heroImg} alt="Galletas artesanales Sol's Cookies" width={400} height={400} fit="fill" loading="eager" />
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <span>Manteca real</span>
+    <span>Chocolate semiamargo</span>
+    <span>Sin conservantes</span>
+    <span>Sal marina</span>
+    <span>Recetas propias</span>
+  </div>
+</div>

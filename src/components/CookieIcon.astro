@@ -1,0 +1,34 @@
+---
+// Logo de la galleta. "color" es la versión a color; "light" es la versión
+// monocromática calada (los chips son huecos), para fondos oscuros.
+interface Props {
+  variant?: 'color' | 'light';
+  class?: string;
+}
+
+const { variant = 'color', class: className } = Astro.props;
+
+const CHIPS = [[22, 0, 5.5], [11, 19, 5.5], [-11, 19, 5.5], [-22, 0, 5.5], [-11, -19, 5.5], [11, -19, 5.5], [0, 0, 5]];
+// id único por instancia para que las máscaras no choquen entre sí
+const maskId = `cookie-mask-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class:list={['ico', className]}>
+  {variant === 'color' ? (
+    <svg viewBox="0 0 120 120" role="img" aria-label="Sol's Cookies">
+      <circle cx="60" cy="60" r="46" fill="#D9A257" />
+      <circle cx="60" cy="60" r="46" fill="none" stroke="#B47F3E" stroke-width="2" />
+      {CHIPS.map(([dx, dy, r]) => <circle cx={60 + dx} cy={60 + dy} r={r} fill="#5C3A22" />)}
+    </svg>
+  ) : (
+    <svg viewBox="0 0 120 120" aria-hidden="true">
+      <defs>
+        <mask id={maskId}>
+          <rect width="120" height="120" fill="#fff" />
+          {CHIPS.map(([dx, dy, r]) => <circle cx={60 + dx} cy={60 + dy} r={r} fill="#000" />)}
+        </mask>
+      </defs>
+      <circle cx="60" cy="60" r="46" fill="#FAF4EC" mask={`url(#${maskId})`} />
+    </svg>
+  )}
+</div>

@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Sol's Cookies" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<slot />
+
+<script>
+// activa el fade-in (.rv en el css) cuando el bloque entra en pantalla
+const reveals = [...document.querySelectorAll<HTMLElement>('.rv')];
+
+// stagger: los bloques hermanos aparecen con un pequeño delay entre sí
+reveals.forEach(el => {
+  const siblings = [...el.parentElement!.children].filter(n => n.classList.contains('rv'));
+  el.style.transitionDelay = Math.min(siblings.indexOf(el), 3) * 90 + 'ms';
+});
+
+const show = (el: Element) => el.classList.add('in');
+
+// fallback manual por si el navegador no soporta IntersectionObserver
+const sweep = () => {
+  const h = innerHeight;
+  reveals.forEach(el => {
+    if (el.classList.contains('in')) return;
+    const r = el.getBoundingClientRect();
+    if (r.top < h * 0.92 && r.bottom > 0) show(el);
+  });
+};
+
+try {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      show(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+} catch (e) {
+  reveals.forEach(show);
+}
+
+addEventListener('scroll', sweep, { passive: true });
+addEventListener('resize', sweep);
+addEventListener('load', sweep);
+sweep();
+
+// red de seguridad: si algo falla, que igual se vea el contenido
+setTimeout(() => reveals.forEach(show), 1600);
+</script>
+</body>
+</html>

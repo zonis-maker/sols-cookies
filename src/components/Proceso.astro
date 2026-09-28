@@ -1,0 +1,26 @@
+---
+const pasos = [
+  { titulo: 'Mezcla', texto: 'Manteca a temperatura ambiente, azúcar mascabo y harina sin refinar. Todo pesado a mano.' },
+  { titulo: 'Reposo en frío', texto: 'La masa descansa 48 horas en cámara. Ahí se desarrolla el sabor y la textura.' },
+  { titulo: 'Horno del día', texto: 'Se hornea la mañana del pedido y se entrega el mismo día, todavía tibia.' },
+];
+---
+
+<section class="sec lino" id="proceso">
+  <div class="wrap">
+    <div class="sechead rv">
+      <div class="eyebrow">Cómo se hacen</div>
+      <h2>Tres días, <em>una tanda</em></h2>
+      <p>El reposo largo en frío es lo que da el borde crocante y el centro húmedo.</p>
+    </div>
+    <div class="steps">
+      {pasos.map((p, i) => (
+        <div class="step rv">
+          <div class="n">{String(i + 1).padStart(2, '0')}</div><div class="bar"></div>
+          <h3>{p.titulo}</h3>
+          <p>{p.texto}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

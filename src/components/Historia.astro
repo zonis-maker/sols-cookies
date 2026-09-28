@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import bandeja from '../assets/bandeja.jpg';
+---
+
+<section class="sec story" id="historia">
+  <div class="wrap">
+    <div class="rv">
+      <div class="eyebrow">Quién las hace</div>
+      <h2>Empezó en una cocina <em>de departamento</em></h2>
+      <p>Sol horneaba para amigos los domingos. Cuando los pedidos no entraron más en el horno de casa, alquiló una cocina en el barrio y siguió con la misma receta escrita a mano.</p>
+      <p>Hoy son cuatro personas y siguen haciendo todo por tanda: pesar, mezclar, bollar y hornear. Sin premezclas, sin conservantes y sin apurar los tiempos de reposo.</p>
+      <div class="quote">Si no la comería yo, no sale del horno.</div>
+    </div>
+    <div class="storyshot rv"><Image src={bandeja} alt="Bandeja de galletas recién salida del horno" width={800} /></div>
+  </div>
+</section>
